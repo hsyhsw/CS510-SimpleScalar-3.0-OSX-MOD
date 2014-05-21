@@ -1,0 +1,164 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		2F35AAD3192C9D14005FFFD4 /* exo-test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "exo-test.c"; sourceTree = "<group>"; };
+		2F35AAD4192C9D14005FFFD4 /* exolex.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = exolex.c; sourceTree = "<group>"; };
+		2F35AAD5192C9D14005FFFD4 /* exolex.l */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.lex; path = exolex.l; sourceTree = "<group>"; };
+		2F35AAD6192C9D14005FFFD4 /* exolex.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = exolex.o; sourceTree = "<group>"; };
+		2F35AAD7192C9D14005FFFD4 /* FOO.exo */ = {isa = PBXFileReference; lastKnownFileType = text; path = FOO.exo; sourceTree = "<group>"; };
+		2F35AAD8192C9D14005FFFD4 /* FOO.exo.gz */ = {isa = PBXFileReference; lastKnownFileType = archive.gzip; path = FOO.exo.gz; sourceTree = "<group>"; };
+		2F35AAD9192C9D14005FFFD4 /* FOO1.exo */ = {isa = PBXFileReference; lastKnownFileType = text; path = FOO1.exo; sourceTree = "<group>"; };
+		2F35AADA192C9D14005FFFD4 /* FOOBAR.exo */ = {isa = PBXFileReference; lastKnownFileType = text; path = FOOBAR.exo; sourceTree = "<group>"; };
+		2F35AADB192C9D14005FFFD4 /* FOOBAR1.exo */ = {isa = PBXFileReference; lastKnownFileType = text; path = FOOBAR1.exo; sourceTree = "<group>"; };
+		2F35AADC192C9D14005FFFD4 /* libexo.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libexo.a; sourceTree = "<group>"; };
+		2F35AADD192C9D14005FFFD4 /* libexo.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = libexo.c; sourceTree = "<group>"; };
+		2F35AADE192C9D14005FFFD4 /* libexo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libexo.h; sourceTree = "<group>"; };
+		2F35AADF192C9D14005FFFD4 /* libexo.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = libexo.o; sourceTree = "<group>"; };
+		2F35AAE0192C9D14005FFFD4 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		2F35AAE1192C9D14005FFFD4 /* sysprobe */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = sysprobe; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		2F35AACD192C9D14005FFFD4 = {
+			isa = PBXGroup;
+			children = (
+				2F35AAD3192C9D14005FFFD4 /* exo-test.c */,
+				2F35AAD4192C9D14005FFFD4 /* exolex.c */,
+				2F35AAD5192C9D14005FFFD4 /* exolex.l */,
+				2F35AAD6192C9D14005FFFD4 /* exolex.o */,
+				2F35AAD7192C9D14005FFFD4 /* FOO.exo */,
+				2F35AAD8192C9D14005FFFD4 /* FOO.exo.gz */,
+				2F35AAD9192C9D14005FFFD4 /* FOO1.exo */,
+				2F35AADA192C9D14005FFFD4 /* FOOBAR.exo */,
+				2F35AADB192C9D14005FFFD4 /* FOOBAR1.exo */,
+				2F35AADC192C9D14005FFFD4 /* libexo.a */,
+				2F35AADD192C9D14005FFFD4 /* libexo.c */,
+				2F35AADE192C9D14005FFFD4 /* libexo.h */,
+				2F35AADF192C9D14005FFFD4 /* libexo.o */,
+				2F35AAE0192C9D14005FFFD4 /* Makefile */,
+				2F35AAE1192C9D14005FFFD4 /* sysprobe */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXLegacyTarget section */
+		2F35AAD2192C9D14005FFFD4 /* libexo */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = all;
+			buildConfigurationList = 2F35AAE2192C9D14005FFFD4 /* Build configuration list for PBXLegacyTarget "libexo" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/make;
+			buildWorkingDirectory = /Users/adward/Documents/Code_Workspaces/workspace/SimpleScalar/libexo;
+			dependencies = (
+			);
+			name = libexo;
+			passBuildSettingsInEnvironment = 1;
+			productName = libexo;
+		};
+/* End PBXLegacyTarget section */
+
+/* Begin PBXProject section */
+		2F35AACE192C9D14005FFFD4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+			};
+			buildConfigurationList = 2F35AAD1192C9D14005FFFD4 /* Build configuration list for PBXProject "libexo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 2F35AACD192C9D14005FFFD4;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2F35AAD2192C9D14005FFFD4 /* libexo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		2F35AACF192C9D14005FFFD4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx10.6;
+			};
+			name = Debug;
+		};
+		2F35AAD0192C9D14005FFFD4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				SDKROOT = macosx10.6;
+			};
+			name = Release;
+		};
+		2F35AAE3192C9D14005FFFD4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DEBUGGING_SYMBOLS = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = libexo;
+			};
+			name = Debug;
+		};
+		2F35AAE4192C9D14005FFFD4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = libexo;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2F35AAD1192C9D14005FFFD4 /* Build configuration list for PBXProject "libexo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F35AACF192C9D14005FFFD4 /* Debug */,
+				2F35AAD0192C9D14005FFFD4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2F35AAE2192C9D14005FFFD4 /* Build configuration list for PBXLegacyTarget "libexo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F35AAE3192C9D14005FFFD4 /* Debug */,
+				2F35AAE4192C9D14005FFFD4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2F35AACE192C9D14005FFFD4 /* Project object */;
+}

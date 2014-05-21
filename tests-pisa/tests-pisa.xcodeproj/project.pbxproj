@@ -1,0 +1,154 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		2F35AAFC192C9D14005FFFD4 /* bin.big */ = {isa = PBXFileReference; lastKnownFileType = folder; path = bin.big; sourceTree = "<group>"; };
+		2F35AAFD192C9D14005FFFD4 /* bin.little */ = {isa = PBXFileReference; lastKnownFileType = folder; path = bin.little; sourceTree = "<group>"; };
+		2F35AAFE192C9D14005FFFD4 /* eio.big */ = {isa = PBXFileReference; lastKnownFileType = folder; path = eio.big; sourceTree = "<group>"; };
+		2F35AAFF192C9D14005FFFD4 /* eio.little */ = {isa = PBXFileReference; lastKnownFileType = folder; path = eio.little; sourceTree = "<group>"; };
+		2F35AB00192C9D14005FFFD4 /* inputs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = inputs; sourceTree = "<group>"; };
+		2F35AB01192C9D14005FFFD4 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		2F35AB02192C9D14005FFFD4 /* outputs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = outputs; sourceTree = "<group>"; };
+		2F35AB03192C9D14005FFFD4 /* results */ = {isa = PBXFileReference; lastKnownFileType = folder; path = results; sourceTree = "<group>"; };
+		2F35AB04192C9D14005FFFD4 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; path = src; sourceTree = "<group>"; };
+		2F35AB05192C9D14005FFFD4 /* sysprobe */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = sysprobe; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		2F35AAF6192C9D14005FFFD4 = {
+			isa = PBXGroup;
+			children = (
+				2F35AAFC192C9D14005FFFD4 /* bin.big */,
+				2F35AAFD192C9D14005FFFD4 /* bin.little */,
+				2F35AAFE192C9D14005FFFD4 /* eio.big */,
+				2F35AAFF192C9D14005FFFD4 /* eio.little */,
+				2F35AB00192C9D14005FFFD4 /* inputs */,
+				2F35AB01192C9D14005FFFD4 /* Makefile */,
+				2F35AB02192C9D14005FFFD4 /* outputs */,
+				2F35AB03192C9D14005FFFD4 /* results */,
+				2F35AB04192C9D14005FFFD4 /* src */,
+				2F35AB05192C9D14005FFFD4 /* sysprobe */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXLegacyTarget section */
+		2F35AAFB192C9D14005FFFD4 /* tests-pisa */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = all;
+			buildConfigurationList = 2F35AB06192C9D14005FFFD4 /* Build configuration list for PBXLegacyTarget "tests-pisa" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/make;
+			buildWorkingDirectory = "/Users/adward/Documents/Code_Workspaces/workspace/SimpleScalar/tests-pisa";
+			dependencies = (
+			);
+			name = "tests-pisa";
+			passBuildSettingsInEnvironment = 1;
+			productName = "tests-pisa";
+		};
+/* End PBXLegacyTarget section */
+
+/* Begin PBXProject section */
+		2F35AAF7192C9D14005FFFD4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+			};
+			buildConfigurationList = 2F35AAFA192C9D14005FFFD4 /* Build configuration list for PBXProject "tests-pisa" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 2F35AAF6192C9D14005FFFD4;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2F35AAFB192C9D14005FFFD4 /* tests-pisa */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		2F35AAF8192C9D14005FFFD4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx10.6;
+			};
+			name = Debug;
+		};
+		2F35AAF9192C9D14005FFFD4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				SDKROOT = macosx10.6;
+			};
+			name = Release;
+		};
+		2F35AB07192C9D14005FFFD4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DEBUGGING_SYMBOLS = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "tests-pisa";
+			};
+			name = Debug;
+		};
+		2F35AB08192C9D14005FFFD4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "tests-pisa";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2F35AAFA192C9D14005FFFD4 /* Build configuration list for PBXProject "tests-pisa" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F35AAF8192C9D14005FFFD4 /* Debug */,
+				2F35AAF9192C9D14005FFFD4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2F35AB06192C9D14005FFFD4 /* Build configuration list for PBXLegacyTarget "tests-pisa" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F35AB07192C9D14005FFFD4 /* Debug */,
+				2F35AB08192C9D14005FFFD4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2F35AAF7192C9D14005FFFD4 /* Project object */;
+}

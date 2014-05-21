@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ $# -eq 0 ]
+then
+	sim-bpred -bpred piecewise bench/bzip200.peak.ev6 bench/bzip2.lgred.graphic 1
+elif [ $# -eq 3 ]
+then
+	sim-bpred -bpred piecewise -bpred:piecewise $1 $2 $3 bench/bzip200.peak.ev6 bench/bzip2.lgred.graphic 1
+else
+	echo "usage: $0 [n m h]"
+fi
+

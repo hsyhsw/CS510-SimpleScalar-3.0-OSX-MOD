@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ $# -eq 0 ]
+then
+	sim-bpred -bpred piecewise bench/gap00.peak.ev6 -l bench/gap.input/ -m 100M < bench/gap.ref.in
+elif [ $# -eq 3 ]
+then
+	sim-bpred -bpred piecewise -bpred:piecewise $1 $2 $3 bench/gap00.peak.ev6 -l bench/gap.input/ -m 100M < bench/gap.ref.in
+else
+	echo "usage: $0 [n m h]"
+fi
+
