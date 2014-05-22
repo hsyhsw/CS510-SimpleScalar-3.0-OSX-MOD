@@ -251,7 +251,7 @@ unsigned int xor) /* history xor address flag */
 			pred_dir->config.piecewise.n = l1size;
 			pred_dir->config.piecewise.m = l2size;
 			pred_dir->config.piecewise.h = shift_width;
-			pred_dir->config.piecewise.theta = 2.14 * (shift_width + 1) + 20.58; // author found this formula to give optimal accuracy at all history lengths, see §3.2, §7.3
+			pred_dir->config.piecewise.theta = 2.14 * (shift_width + 1) + 20.58; // author found this formula to give optimal accuracy at all history lengths, see ยง3.2, ยง7.3
 			pred_dir->config.piecewise.ghr = calloc(shift_width, sizeof(int));
 			pred_dir->config.piecewise.ga = calloc(shift_width, sizeof(md_addr_t));
 
@@ -260,7 +260,7 @@ unsigned int xor) /* history xor address flag */
 			for (i = 0; i < l1size; ++i) {
 				pred_dir->config.piecewise.w[i] = (int **) calloc(l2size, sizeof(int *));
 				for (j = 0; j < l2size; ++j)
-					pred_dir->config.piecewise.w[i][j] = (int *) calloc(shift_width + 1, sizeof(int));
+					pred_dir->config.piecewise.w[i][j] = (int *) calloc(shift_width, sizeof(int));
 			}
 			// allocate w00
 			pred_dir->config.piecewise.w00 = (int *) calloc(l1size, sizeof(int));

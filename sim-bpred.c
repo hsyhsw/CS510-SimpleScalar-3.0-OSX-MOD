@@ -50,6 +50,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <math.h>
 
 #include "host.h"
@@ -94,9 +95,9 @@ static int comb_nelt = 1;
 static int comb_config[1] = { /* meta_table_size */1024 };
 
 /* piecewise linear predictor config */
-/* XXX: configuration chosen from §6.3 */
+/* XXX: configuration referenced from §7.3 with some exhuastive tunning */
 static int piecewise_nelt = 3;
-static int piecewise_config[3] = { /* n */256, /* m */256, /* h */63 };
+static int piecewise_config[3] = { /* n */32, /* m */32, /* h */31 };
 
 /* return address stack (RAS) size */
 static int ras_size = 8;
@@ -119,7 +120,8 @@ void sim_reg_options(struct opt_odb_t *odb) {
 	opt_reg_header(odb, "sim-bpred: This simulator implements a branch predictor analyzer.\n");
 
 	/* branch predictor options */
-	opt_reg_note(odb, "  Branch predictor configuration examples for 2-level predictor:\n"
+	opt_reg_note(odb,
+			"  Branch predictor configuration examples for 2-level predictor:\n"
 			"    Configurations:   N, M, W, X\n"
 			"      N   # entries in first level (# of shift register(s))\n"
 			"      W   width of shift register(s)\n"
@@ -131,14 +133,28 @@ void sim_reg_options(struct opt_odb_t *odb) {
 			"      PAg      : N, W, 2^W, 0\n"
 			"      PAp      : N, W, M (M == 2^(N+W)), 0\n"
 			"      gshare   : 1, W, 2^W, 1\n"
-			"      piecewise: piecewise linear predictor with default config (n, m, h) = (256, 256, 63)\n"
-			"      Predictor `comb' combines a bimodal and a 2-level predictor.\n");
+			"      Predictor `comb' combines a bimodal and a 2-level predictor.\n\n"
+			"  Branch predictor configuration examples for piecewise linear predictor:\n"
+			"    Configurations: n, m, h\n"
+			"      n   moduli for the first index of the w array\n"
+			"      m   moduli for the second index of the w array\n"
+			"      h   the global history length\n"
+			"    Sample predictors for 32KB hardware budget:\n"
+			"      piecewise_32 : piecewise linear predictor  with default config (n, m, h) = (32, 32, 31)\n"
+			"      path-based_32: path-based neural predictor with config (n, m, h) = (1, 1024, 31)\n"
+			"      perceptron_32: perceptron predictor        with config (n, m, h) = (1024, 1, 31)\n"
+			"    Sample predictors for unlimited hardware budget:\n"
+			"      piecewise_u  : piecewise linear predictor  with config (n, m, h) = (256, 256, 63)\n"
+			"      path-based_u : path-based neural predictor with config (n, m, h) = (1, 65536, 63)\n"
+			"      perceptron_u : perceptron predictor        with config (n, m, h) = (65536, 1, 63)\n");
 
 	/* instruction limit */
 	opt_reg_uint(odb, "-max:inst", "maximum number of inst's to execute", &max_insts, /* default */0,
 	/* print */TRUE, /* format */NULL);
 
-	opt_reg_string(odb, "-bpred", "branch predictor type {nottaken|taken|bimod|2lev|piecewise|comb}", &pred_type, /* default */"bimod",
+	opt_reg_string(odb, "-bpred",
+			"branch predictor type\n"
+			"\t{nottaken|taken|bimod|2lev|comb|piecewise(same as piecewise_32)|{piecewise|path-based|perceptron}{_32|_u}}", &pred_type, /* default */"bimod",
 	/* print */TRUE, /* format */NULL);
 
 	opt_reg_int_list(odb, "-bpred:bimod", "bimodal predictor config (<table size>)", bimod_config, bimod_nelt, &bimod_nelt,
@@ -230,12 +246,82 @@ void sim_check_options(struct opt_odb_t *odb, int argc, char **argv) {
 		/* btb sets */btb_config[0],
 		/* btb assoc */btb_config[1],
 		/* ret-addr stack size */ras_size);
-	} else if (!mystricmp(pred_type, "piecewise")) { // XXX: chosen predictor type is piecewise linear predictor
+	} else if (!strncmp(pred_type, "piecewise", 9)) { // XXX: chosen predictor type is piecewise linear predictor
 		/* piecewise linear branch predictor */
 		if (piecewise_nelt != 3)
 			fatal("bad piecewise linear pred config (<n> <m> <h>)");
 		if (btb_nelt != 2)
 			fatal("bad btb config (<num_sets> <associativity>)");
+
+		if (!strcmp(pred_type, "piecewise")) {
+			// nothing to do...
+		} else if (!strcmp(pred_type + 9, "_32")) {
+			// nothing to do...
+		} else if (!strcmp(pred_type + 9, "_u")) {
+			piecewise_config[0] = 256;
+			piecewise_config[1] = 256;
+			piecewise_config[2] = 63;
+		} else {
+			fatal("cannot parse predictor type `%s'", pred_type);
+		}
+
+		pred = bpred_create(BPredPieceLin,
+		/* bimod table size */0,
+		/* 2lev l1 size-->used as n, see §5.1, §6.3 */piecewise_config[0],
+		/* 2lev l2 size-->used as m, see §5.1, §6.3 */piecewise_config[1],
+		/* meta table size */0,
+		/* history reg size-->used as h, see §5.1, §6.3 */piecewise_config[2],
+		/* history xor address */0,
+		/* btb sets */btb_config[0],
+		/* btb assoc */btb_config[1],
+		/* ret-addr stack size */ras_size);
+	} else if (!strncmp(pred_type, "path-based", 10)) { // XXX: chosen predictor type is path-based neural predictor
+		/* piecewise linear branch predictor */
+		if (btb_nelt != 2)
+			fatal("bad btb config (<num_sets> <associativity>)");
+
+		if (!strcmp(pred_type, "path-based")) {
+			fatal("cannot parse predictor type `%s': forgot _32 or _u?", pred_type);
+		} else if (!strcmp(pred_type + 10, "_32")) {
+			piecewise_config[0] = 1;
+			piecewise_config[1] = 1024;
+			piecewise_config[2] = 31;
+		} else if (!strcmp(pred_type + 10, "_u")) {
+			piecewise_config[0] = 1;
+			piecewise_config[1] = 65536;
+			piecewise_config[2] = 63;
+		} else {
+			fatal("cannot parse predictor type `%s'", pred_type);
+		}
+
+		pred = bpred_create(BPredPieceLin,
+		/* bimod table size */0,
+		/* 2lev l1 size-->used as n, see §5.1, §6.3 */piecewise_config[0],
+		/* 2lev l2 size-->used as m, see §5.1, §6.3 */piecewise_config[1],
+		/* meta table size */0,
+		/* history reg size-->used as h, see §5.1, §6.3 */piecewise_config[2],
+		/* history xor address */0,
+		/* btb sets */btb_config[0],
+		/* btb assoc */btb_config[1],
+		/* ret-addr stack size */ras_size);
+	} else if (!strncmp(pred_type, "perceptron", 10)) { // XXX: chosen predictor type is perceptron predictor
+		/* piecewise linear branch predictor */
+		if (btb_nelt != 2)
+			fatal("bad btb config (<num_sets> <associativity>)");
+
+		if (!strcmp(pred_type, "perceptron")) {
+			fatal("cannot parse predictor type `%s': forgot _32 or _u?", pred_type);
+		} else if (!strcmp(pred_type + 10, "_32")) {
+			piecewise_config[0] = 1024;
+			piecewise_config[1] = 1;
+			piecewise_config[2] = 31;
+		} else if (!strcmp(pred_type + 10, "_u")) {
+			piecewise_config[0] = 65536;
+			piecewise_config[1] = 1;
+			piecewise_config[2] = 63;
+		} else {
+			fatal("cannot parse predictor type `%s'", pred_type);
+		}
 
 		pred = bpred_create(BPredPieceLin,
 		/* bimod table size */0,
