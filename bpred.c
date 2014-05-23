@@ -251,7 +251,7 @@ unsigned int xor) /* history xor address flag */
 			pred_dir->config.piecewise.n = l1size;
 			pred_dir->config.piecewise.m = l2size;
 			pred_dir->config.piecewise.h = shift_width;
-			pred_dir->config.piecewise.theta = 2.14 * (shift_width + 1) + 20.58; // author found this formula to give optimal accuracy at all history lengths, see ยง3.2, ยง7.3
+			pred_dir->config.piecewise.theta = 2.14 * (shift_width + 1) + 20.58; // author found this formula to give optimal accuracy at all history lengths, see §3.2, §7.3
 			pred_dir->config.piecewise.ghr = calloc(shift_width, sizeof(int));
 			pred_dir->config.piecewise.ga = calloc(shift_width, sizeof(md_addr_t));
 
@@ -722,9 +722,6 @@ int stack_recover_idx) /* Non-speculative top-of-stack;
 	pred->retstack.tos = stack_recover_idx;
 }
 
-// XXX: addition and subtraction on var saturate between +127 and -128.
-#define SATURATE_IN_RANGE(var) ((var) = (((var) > 127) ? 127 : (((var) < -128) ? -128 : (var))))
-
 /* update the branch predictor, only useful for stateful predictors; updates
  entry for instruction type OP at address BADDR.  BTB only gets updated
  for branches which are taken.  Inst was determined to jump to
@@ -941,26 +938,20 @@ struct bpred_update_t *dir_update_ptr)/* pred state pointer */
 		md_addr_t baddr_mod = baddr & (n - 1);
 		int ga_mod;
 
-		if (abs(output) < theta || !!pred_taken != !!taken) {
-			if (taken)
-				w00[baddr_mod] += 1;
-			else
-				w00[baddr_mod] -= 1;
+// XXX: addition and subtraction on var saturate between +127 and -128.
+#define SATURATE_INC_DEC(inc, var) ((inc) ? (((var) < 127) ? ++(var) : 0) : (((var) > -128) ? --(var) : 0))
 
-			SATURATE_IN_RANGE(w00[baddr_mod]);
+		if (abs(output) < theta || !!pred_taken != !!taken) {
+			SATURATE_INC_DEC(taken, w00[baddr_mod]);
 
 			for (i = 0; i < h; ++i) {
 				// m was chosen as powers of 2 --> ga[i] % m;
 				ga_mod = ga[i] & (m - 1);
-				if (ghr[i] == taken)
-					w[baddr_mod][ga_mod][i] += 1;
-				else
-					w[baddr_mod][ga_mod][i] -= 1;
-
-				SATURATE_IN_RANGE(w[baddr_mod][ga_mod][i]);
+				SATURATE_INC_DEC(ghr[i] == taken, w[baddr_mod][ga_mod][i]);
 			}
 		}
 
+		// shift branch address/outcome into the arrays
 		for (i = h - 1; i != 0; --i) {
 			ga[i] = ga[i - 1];
 			ghr[i] = ghr[i - 1];

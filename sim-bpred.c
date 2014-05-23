@@ -120,8 +120,7 @@ void sim_reg_options(struct opt_odb_t *odb) {
 	opt_reg_header(odb, "sim-bpred: This simulator implements a branch predictor analyzer.\n");
 
 	/* branch predictor options */
-	opt_reg_note(odb,
-			"  Branch predictor configuration examples for 2-level predictor:\n"
+	opt_reg_note(odb, "  Branch predictor configuration examples for 2-level predictor:\n"
 			"    Configurations:   N, M, W, X\n"
 			"      N   # entries in first level (# of shift register(s))\n"
 			"      W   width of shift register(s)\n"
@@ -143,7 +142,7 @@ void sim_reg_options(struct opt_odb_t *odb) {
 			"      piecewise_32 : piecewise linear predictor  with default config (n, m, h) = (32, 32, 31)\n"
 			"      path-based_32: path-based neural predictor with config (n, m, h) = (1, 1024, 31)\n"
 			"      perceptron_32: perceptron predictor        with config (n, m, h) = (1024, 1, 31)\n"
-			"    Sample predictors for unlimited hardware budget:\n"
+			"    Sample predictors for 4MB hardware budget:\n"
 			"      piecewise_u  : piecewise linear predictor  with config (n, m, h) = (256, 256, 63)\n"
 			"      path-based_u : path-based neural predictor with config (n, m, h) = (1, 65536, 63)\n"
 			"      perceptron_u : perceptron predictor        with config (n, m, h) = (65536, 1, 63)\n");
@@ -152,8 +151,7 @@ void sim_reg_options(struct opt_odb_t *odb) {
 	opt_reg_uint(odb, "-max:inst", "maximum number of inst's to execute", &max_insts, /* default */0,
 	/* print */TRUE, /* format */NULL);
 
-	opt_reg_string(odb, "-bpred",
-			"branch predictor type\n"
+	opt_reg_string(odb, "-bpred", "branch predictor type\n"
 			"\t{nottaken|taken|bimod|2lev|comb|piecewise(same as piecewise_32)|{piecewise|path-based|perceptron}{_32|_u}}", &pred_type, /* default */"bimod",
 	/* print */TRUE, /* format */NULL);
 
